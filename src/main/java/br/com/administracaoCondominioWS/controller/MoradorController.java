@@ -15,7 +15,7 @@ import br.com.administracaoCondominioWS.model.Morador;
 import br.com.administracaoCondominioWS.repository.MoradorRepository;
 
 @RestController
-@RequestMapping("/moradores")
+@RequestMapping(value = "/moradores")
 public class MoradorController {
 	@Autowired
 	private MoradorRepository repositorio;
