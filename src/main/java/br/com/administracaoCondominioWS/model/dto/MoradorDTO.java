@@ -1,25 +1,14 @@
 package br.com.administracaoCondominioWS.model.dto;
 
-public class MoradorDTO {
-	private Long id;
+import br.com.administracaoCondominioWS.model.AbstractEntity;
+
+public class MoradorDTO extends AbstractEntity<Long> {
 	private String nome;
 	private String cpf;
 	private String email;
 
-	public MoradorDTO(Long id, String nome, String cpf, String email) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.email = email;
-	}
+	public MoradorDTO() {
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNome() {

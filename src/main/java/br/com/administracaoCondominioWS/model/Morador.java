@@ -1,26 +1,21 @@
 package br.com.administracaoCondominioWS.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Morador {
+public class Morador extends AbstractEntity<Long> {
 
-	@Id
-	@GeneratedValue
-	private Long id;
 	private String nome;
 	private String cpf;
 	private String email;
+	private String telefone;
+	private String tipoMorador;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@ManyToOne
+	@JoinColumn(name = "apartamento_id", nullable = true)
+	private Apartamento apartamento;
 
 	public String getNome() {
 		return nome;
@@ -44,6 +39,30 @@ public class Morador {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getTipoMorador() {
+		return tipoMorador;
+	}
+
+	public void setTipoMorador(String tipoMorador) {
+		this.tipoMorador = tipoMorador;
+	}
+
+	public Apartamento getApartamento() {
+		return apartamento;
+	}
+
+	public void setApartamento(Apartamento apartamento) {
+		this.apartamento = apartamento;
 	}
 
 }
