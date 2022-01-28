@@ -1,8 +1,12 @@
 package br.com.administracaoCondominioWS.model.dto;
 
-import br.com.administracaoCondominioWS.model.AbstractEntity;
+import javax.validation.constraints.NotEmpty;
 
-public class MoradorDTO extends AbstractEntity<Long> {
+import org.hibernate.validator.constraints.Length;
+
+public class MoradorDTO {
+	@NotEmpty(message = "Campo Obrigatório")
+	@Length(min = 10, max = 99, message = "Atenção ao tamanho do campo")
 	private String nome;
 	private String cpf;
 	private String email;
