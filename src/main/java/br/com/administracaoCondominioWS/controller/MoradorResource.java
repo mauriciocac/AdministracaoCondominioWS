@@ -33,6 +33,16 @@ public class MoradorResource {
 	@Autowired
 	private ModelMapper mMap;
 
+	public int raio1, raio2, soma = 20;
+
+	@GetMapping("/teste")
+	public ResponseEntity<String> setRaios(int raio) {
+		raio1 = raio;
+		raio2 = soma - raio1;
+
+		return ResponseEntity.status(HttpStatus.OK).body(String.valueOf(raio2));
+	}
+
 	@GetMapping
 	public ResponseEntity<List<MoradorDTO>> listarMoradores() {
 		List<MoradorDTO> moradores = service.listarMoradores().stream()
@@ -43,12 +53,19 @@ public class MoradorResource {
 		return ResponseEntity.status(HttpStatus.OK).body(moradores);
 	}
 
+	@GetMapping("/inquilinos")
+	public ResponseEntity<List<MoradorDTO>> listarMoradoresInquilinos() {
+		List<MoradorDTO> moradores = service.listarMoradoresInquilinos().stream()
+				.map(morador -> mMap.map(morador, MoradorDTO.class)).collect(Collectors.toList());
+		if (moradores.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(moradores);
+	}
+
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<MoradorDTO> obterMorador(@PathVariable Long id) {
 		Optional<Morador> optionalMorador = service.obterMorador(id);
-		if (optionalMorador.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
 		return ResponseEntity.status(HttpStatus.OK).body(mMap.map(optionalMorador.get(), MoradorDTO.class));
 	}
 
@@ -60,21 +77,13 @@ public class MoradorResource {
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<MoradorDTO> excluirMorador(@PathVariable Long id) {
-		Optional<Morador> optionalMorador = service.obterMorador(id);
-		if (!optionalMorador.isEmpty()) {
-			service.removerMorador(id);
-			return ResponseEntity.status(HttpStatus.OK).body(mMap.map(optionalMorador.get(), MoradorDTO.class));
-		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		service.removerMorador(id);
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<MoradorDTO> atualizarMorador(@PathVariable Long id, @Valid @RequestBody MoradorDTO dto) {
-		Optional<Morador> optionalMorador = service.obterMorador(id);
-		if (!optionalMorador.isEmpty()) {
-			service.atualizarMoradores(mMap.map(dto, Morador.class), id);
-			return ResponseEntity.status(HttpStatus.OK).body(mMap.map(optionalMorador.get(), MoradorDTO.class));
-		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		service.atualizarMoradores(mMap.map(dto, Morador.class), id);
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 }

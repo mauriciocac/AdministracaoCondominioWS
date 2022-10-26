@@ -1,6 +1,7 @@
 package br.com.administracaoCondominioWS.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +19,30 @@ public class MoradorService {
 		return repositorio.findAll();
 	}
 
+	public List<Morador> listarMoradoresInquilinos() {
+		return repositorio.listarMoradoresInquilinos();
+	}
+
 	public Morador salvarMoradores(Morador morador) {
 		return repositorio.save(morador);
 	}
 
 	public void removerMorador(Long id) {
+		obterMorador(id);
 		repositorio.deleteById(id);
-
 	}
 
-	public Morador atualizarMoradores(Morador dto, Long id) {
-		dto.setId(id);
-		return repositorio.save(dto);
+	public Morador atualizarMoradores(Morador obj, Long id) {
+		obterMorador(id);
+		obj.setId(id);
+		return repositorio.save(obj);
 	}
 
 	public Optional<Morador> obterMorador(Long id) {
-		return repositorio.findById(id);
+		Optional<Morador> optional = repositorio.findById(id);
+		if (optional.isEmpty()) {
+			throw new NoSuchElementException("ID " + id + " não foi encontrado");
+		}
+		return optional;
 	}
 }
