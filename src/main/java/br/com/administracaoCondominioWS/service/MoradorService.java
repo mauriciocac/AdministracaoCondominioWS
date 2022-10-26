@@ -40,7 +40,7 @@ public class MoradorService {
 
 	public Optional<Morador> obterMorador(Long id) {
 		Optional<Morador> optional = repositorio.findById(id);
-		if (optional.isEmpty()) {
+		if (optional.isPresent()) {
 			throw new NoSuchElementException("ID " + id + " não foi encontrado");
 		}
 		return optional;

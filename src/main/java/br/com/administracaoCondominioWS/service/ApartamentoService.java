@@ -27,7 +27,7 @@ public class ApartamentoService {
 
 	public ApartamentoDTO buscarApartamento(Long id) {
 		Optional<Apartamento> asd = obterApartamento(id);
-		if (asd.isEmpty()) {
+		if (asd.isPresent()) {
 			throw new NoSuchElementException("ID " + id + " não foi encontrado");
 		}
 		return toDto(asd.get());
@@ -39,7 +39,7 @@ public class ApartamentoService {
 
 	public ApartamentoDTO desabilitarApartamento(Long id, ApartamentoDTO dto) {
 		Optional<Apartamento> opt = obterApartamento(id);
-		if (opt.isEmpty()) {
+		if (opt.isPresent()) {
 			throw new NoSuchElementException("Esse apartamento não pode ser desabilitado");
 
 		}
