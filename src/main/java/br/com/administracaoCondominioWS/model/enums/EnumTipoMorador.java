@@ -1,12 +1,17 @@
 package br.com.administracaoCondominioWS.model.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum EnumTipoMorador {
-	PRO("Proprietario"), INQ("Inquilino");
+	PRO(1, "Proprietario"), INQ(2, "Inquilino");
 
-	String tipo;
+	private String descricao;
+	private Integer id;
 
-	EnumTipoMorador(String tipo) {
-		this.tipo = tipo;
+	EnumTipoMorador(Integer id, String descricao) {
+		this.id = id;
+		this.descricao = descricao;
 	}
 
 }

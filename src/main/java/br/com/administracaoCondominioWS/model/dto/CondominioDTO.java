@@ -1,23 +1,34 @@
 package br.com.administracaoCondominioWS.model.dto;
 
-public class CondominioDTO {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.administracaoCondominioWS.model.Edificio;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
+public class CondominioDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private Long id;
-	private String nome;
+	private String descricao;
+	private String cnpj;
+	private String numero;
+	private String bairro;
+	private String rua;
+	private String cidade;
+	private String estado;
+	private String cep;
+	private List<Edificio> edificios = new ArrayList<>();
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 }

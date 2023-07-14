@@ -21,11 +21,11 @@ public class ApartamentoService {
 	@Autowired
 	private ModelMapper mapper;
 
-	public ApartamentoDTO salvarApartamento(ApartamentoDTO dto) {
+	public ApartamentoDTO salvar(ApartamentoDTO dto) {
 		return toDto(repo.save(toObj(dto)));
 	}
 
-	public ApartamentoDTO buscarApartamento(Long id) {
+	public ApartamentoDTO buscar(Long id) {
 		Optional<Apartamento> asd = obterApartamento(id);
 		if (asd.isPresent()) {
 			throw new NoSuchElementException("ID " + id + " não foi encontrado");
@@ -33,11 +33,11 @@ public class ApartamentoService {
 		return toDto(asd.get());
 	}
 
-	public List<ApartamentoDTO> listarApartamentos() {
+	public List<ApartamentoDTO> listar() {
 		return repo.findAll().stream().map(ap -> toDto(ap)).collect(Collectors.toList());
 	}
 
-	public ApartamentoDTO desabilitarApartamento(Long id, ApartamentoDTO dto) {
+	public ApartamentoDTO desabilitar(Long id, ApartamentoDTO dto) {
 		Optional<Apartamento> opt = obterApartamento(id);
 		if (opt.isPresent()) {
 			throw new NoSuchElementException("Esse apartamento não pode ser desabilitado");

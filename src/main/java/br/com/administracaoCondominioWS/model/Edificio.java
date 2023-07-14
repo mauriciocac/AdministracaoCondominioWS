@@ -7,38 +7,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity
-public class Edificio extends AbstractEntity<Long> {
+import org.springframework.lang.Nullable;
 
-	private String nome;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Edificio extends AbstractEntity<Long> {
+	private static final long serialVersionUID = 1L;
+
+	private String descricao;
 	@ManyToOne
-	@JoinColumn(name = "condominio_id", nullable = false)
+	@JoinColumn(name = "condominio")
 	private Condominio condominio;
+	@Nullable
 	@OneToMany(mappedBy = "edificio")
 	private List<Apartamento> apartamento;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Condominio getCondominio() {
-		return condominio;
-	}
-
-	public void setCondominio(Condominio condominio) {
-		this.condominio = condominio;
-	}
-
-	public List<Apartamento> getApartamento() {
-		return apartamento;
-	}
-
-	public void setApartamento(List<Apartamento> apartamento) {
-		this.apartamento = apartamento;
-	}
 
 }

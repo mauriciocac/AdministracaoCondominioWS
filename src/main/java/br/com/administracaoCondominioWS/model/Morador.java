@@ -4,8 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Morador extends AbstractEntity<Long> {
+	private static final long serialVersionUID = 1L;
 
 	private String nome;
 	private String cpf;
@@ -16,53 +26,5 @@ public class Morador extends AbstractEntity<Long> {
 	@ManyToOne
 	@JoinColumn(name = "apartamento_id", nullable = true)
 	private Apartamento apartamento;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getTipoMorador() {
-		return tipoMorador;
-	}
-
-	public void setTipoMorador(String tipoMorador) {
-		this.tipoMorador = tipoMorador;
-	}
-
-	public Apartamento getApartamento() {
-		return apartamento;
-	}
-
-	public void setApartamento(Apartamento apartamento) {
-		this.apartamento = apartamento;
-	}
 
 }

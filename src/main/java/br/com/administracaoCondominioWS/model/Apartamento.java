@@ -7,8 +7,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Apartamento extends AbstractEntity<Long> {
+	private static final long serialVersionUID = 1L;
 
 	private String numero;
 	private Boolean habilitado;
@@ -27,69 +37,5 @@ public class Apartamento extends AbstractEntity<Long> {
 	private List<AluguelJogos> aluguelJogos;
 	@OneToMany(mappedBy = "apartamento")
 	private List<AluguelAcademia> aluguelAcademias;
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public Edificio getEdificio() {
-		return edificio;
-	}
-
-	public void setEdificio(Edificio edificio) {
-		this.edificio = edificio;
-	}
-
-	public List<Morador> getMoradores() {
-		return moradores;
-	}
-
-	public void setMoradores(List<Morador> moradores) {
-		this.moradores = moradores;
-	}
-
-	public List<Mensalidade> getMensalidades() {
-		return mensalidades;
-	}
-
-	public void setMensalidades(List<Mensalidade> mensalidades) {
-		this.mensalidades = mensalidades;
-	}
-
-	public List<AluguelFesta> getAluguelFestas() {
-		return aluguelFestas;
-	}
-
-	public void setAluguelFestas(List<AluguelFesta> aluguelFestas) {
-		this.aluguelFestas = aluguelFestas;
-	}
-
-	public List<AluguelJogos> getAluguelJogos() {
-		return aluguelJogos;
-	}
-
-	public void setAluguelJogos(List<AluguelJogos> aluguelJogos) {
-		this.aluguelJogos = aluguelJogos;
-	}
-
-	public List<AluguelAcademia> getAluguelAcademias() {
-		return aluguelAcademias;
-	}
-
-	public void setAluguelAcademias(List<AluguelAcademia> aluguelAcademias) {
-		this.aluguelAcademias = aluguelAcademias;
-	}
-
-	public Boolean getHabilitado() {
-		return habilitado;
-	}
-
-	public void setHabilitado(Boolean habilitado) {
-		this.habilitado = habilitado;
-	}
 
 }
